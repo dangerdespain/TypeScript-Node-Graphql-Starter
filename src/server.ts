@@ -30,7 +30,6 @@ const apolloSserver = makeApolloServer({
   context: ()=>Object.assign({}, defaultContext),
 });
 
-
 app.use(errorHandler());
 
 /**

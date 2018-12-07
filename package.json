@@ -1,12 +1,12 @@
 {
-  "name": "express-typescript-starter",
+  "name": "express-typescript-graphql-starter",
   "version": "0.1.0",
-  "description": "A starting point for Node.js express apps with TypeScript",
+  "description": "A magical starting point for Node.js express apps with TypeScript and GraphQL 🦄",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Microsoft/TypeScript-Node-Starter"
+    "url": "https://github.com/dangerdespain/TypeScript-Node-Graphql-Starter"
   },
-  "author": "Bowden Kelly",
+  "author": "@dangerdespain",
   "license": "MIT",
   "scripts": {
     "start": "npm run serve",
