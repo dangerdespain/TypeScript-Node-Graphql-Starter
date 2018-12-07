@@ -2,6 +2,9 @@ import errorHandler from "errorhandler";
 
 import app from "./app";
 
+import apolloServer from './apolloServer'
+
+apolloServer()
 /**
  * Error Handler. Provides full stack - remove for production
  */

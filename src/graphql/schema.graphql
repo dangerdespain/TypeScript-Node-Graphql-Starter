@@ -1,0 +1,14 @@
+scalar Json # hax lol - this is naughty 
+
+type Query {
+  sayHello : Response @cacheControl(maxAge:3)
+}
+
+type Mutation {
+  changeResponse(response:String!):Response
+}
+
+type Response {
+  id : ID!
+  response : String
+}
