@@ -6,7 +6,7 @@ import { mergeTypes } from 'merge-graphql-schemas';
 
 import { mergeSchemas, makeExecutableSchema } from 'graphql-tools';
 import CustomScalars, { RegularExpressionFactory } from "@saeris/graphql-scalars";
-import mongooseSchema from './mongoose';
+import mongooseSchema from '../generated/mongoose';
 
 writeFileSync(`${__dirname}/../src/graphql/generated/mongoose.graphql`,printSchema(mongooseSchema), 'utf-8')
 
