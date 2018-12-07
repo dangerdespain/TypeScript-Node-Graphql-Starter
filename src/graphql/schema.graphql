@@ -1,14 +1,17 @@
-scalar Json # hax lol - this is naughty 
+scalar Date
+scalar JSON
+scalar Json
+scalar MongoID
 
 type Query {
-  sayHello : Response @cacheControl(maxAge:3)
+  sayHello: Response
 }
 
 type Mutation {
-  changeResponse(response:String!):Response
+  debug:Json
 }
 
 type Response {
-  id : ID!
-  response : String
+  id: String!
+  response: String
 }

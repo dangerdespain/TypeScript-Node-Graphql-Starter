@@ -1,0 +1,8 @@
+{
+  "verbose": true,
+  "ignore": ["src/generated/**.graphql",".local/*","*.log"],
+  "execMap": {
+    "rb": "ruby",
+    "pde": "processing --sketch={{pwd}} --run"
+  }
+}

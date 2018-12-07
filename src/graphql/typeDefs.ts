@@ -1,6 +1,10 @@
 import { fileLoader, mergeTypes } from 'merge-graphql-schemas';
+import CustomScalars, { RegularExpressionFactory } from "@saeris/graphql-scalars";
 
-const typesArray = fileLoader('./src/graphql/**/*.graphql');
-let typeDefs =  mergeTypes(typesArray, { all: true })
-
-export default typeDefs
+export default (additionalTypes:any=[])=>{
+  const typesArray = fileLoader('./src/graphql/**/*.graphql');
+  typesArray.concat(additionalTypes)
+  typesArray.concat([CustomScalars.keys()])
+  let typeDefs =  mergeTypes(typesArray, { all: true })
+  return typeDefs
+}
