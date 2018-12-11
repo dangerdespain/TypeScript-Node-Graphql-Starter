@@ -1,0 +1,136 @@
+scalar DateTime 
+scalar BigInt
+
+extend type Query {
+  getInbox(accountId:BigInt!): Inbox
+  getAdminUsers: [Account],
+  searchUsers(instagramUsername:String!):[InstagramAccount]
+  searchInstagram(search:String!,asAccountId:String):Json
+}
+
+extend type Mutation {
+  initSession(instagramUsername:String!):Boolean
+  refreshInstagramProfileByUsername(instagramUsername:String!,asAccountId:String):Json
+  refreshInstagramInboxFeed(limit:Int=10):Json
+  refreshInstagramPostsFeed(accountId:ID!,asAccountId:ID):Json
+  refreshSessionAccountData(accountId:ID!):Json
+  refreshFollowingFeed(accountId:ID!):Json
+  refreshInboxThreadById(inboxThreadId:ID!):Json
+  broadcastTextToInboxThread(inboxThreadId:ID!,message:String):Json
+  followAccountById(accountId:ID!,asAccountId:ID!):Json
+}
+
+
+type Inbox {
+  id: ID!
+  threads: [Thread!]
+}
+
+type ThreadParams {
+  threadId: String
+  lastActivityAt: DateTime
+  muted: Boolean
+  isPin: Boolean
+  named: Boolean
+  pending: Boolean
+  threadType: String
+  viewerId: ID!
+  threadTitle: String
+  isGroup: Boolean
+  mentionsMuted: Boolean
+  inviter: Account
+  hasOlder: Boolean
+  hasNewer: Boolean
+  lastSeenAt: [Json]
+  newestCursor: String
+  oldestCursor: String
+  isSpam: Boolean
+  title: String
+  itemsSeenAt: [Json]
+}
+
+type Thread {
+  id: ID!
+  items: [ThreadItem]
+  accounts: [Account]
+  leftUsers: [Account]
+  _params: ThreadParams
+}
+
+type ThreadItem {
+  id: ID!
+  _params: ThreadItemParams
+}
+
+type ThreadItemParams { 
+  id: ID!
+  userId: ID!
+  timestamp: DateTime
+  itemType: String
+  text: String
+  clientContext: String
+  type: String
+  accountId: Int
+  created: DateTime
+}
+
+type Account {
+  id: ID!
+  _params: AccountParams
+  profileData: Json
+  accountData: Json
+}
+
+type AccountParams {
+  id:ID!
+  username: String
+  fullName: String
+  isPrivate: Boolean
+  profilePicUrl: String
+  friendshipStatus: Json
+  isVerified: Boolean
+  hasAnonymousProfilePicture: Boolean
+  isDirectappInstalled: Boolean
+  picture: String
+}
+
+type InstagramPost {
+  id:ID!
+  _params: InstagramPostParams
+}
+
+type InstagramPostParams {
+  takenAt: DateTime
+  pk: ID!
+  id: ID!
+  deviceTimestamp: DateTime
+  mediaType: Int
+  code: String
+  clientCacheKey: String
+  filterType: Int
+  commentLikesEnabled: Boolean
+  commentThreadingEnabled: Boolean
+  hasMoreComments: Boolean
+  maxNumVisiblePreviewComments: Int
+  previewComments: [Json]
+  canViewMorePreviewComments: Boolean
+  commentCount: Int
+  inlineComposerDisplayCondition: String
+  imageVersions2: [Json]
+  originalWidth: Int
+  originalHeight: Int
+  user: [Json]
+  canViewerReshare: Boolean
+  caption: String
+  captionIsEdited: Boolean
+  likeCount: Int
+  hasLiked: Boolean
+  topLikers: [Json]
+  likers: [Json]
+  photoOfYou: Boolean
+  canViewerSave: Boolean
+  organicTrackingToken: String
+  webLink: String
+  carouselMedia: [Json]
+  images: [Json]
+}

@@ -1,11 +1,10 @@
 import { TypeComposer } from "graphql-compose";
 
-export default function(params:any){
+export default function(TC:any){
 
-  let { TC } = params
-  
   TC.addFields({
     // lonLat: TypeComposer.create('type LonLat { lon: Float, lat: Float }'),
+    id : { type : 'ID', resolve({ _id, id }:any){ return id ? id : _id } },
     notice: 'String', 
     noticeList: { 
       type: '[String]', 

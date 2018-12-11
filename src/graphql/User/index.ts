@@ -7,10 +7,7 @@ export default {
   Mutation : {
 
   },
-  User:{
-    id : {
-      fragment: `... on User { _id }`,
-      resolve({ _id }:any){ return _id },
-    }
-  },
+  // User:{
+   
+  // },
 }

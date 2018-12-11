@@ -24,7 +24,12 @@ app.post('/postgraphile',bodyParser.json(),pgMiddleware)
 
 const apolloSserver = makeApolloServer({
   schema : mergeSchemas({
-    schemas : [remotePgSchema,mongooseSchema,typeDefs([mongooseSchema])],
+    schemas : [
+      // remotePgSchema,
+      typeDefs([]),
+      mongooseSchema,
+      // typeDefs([mongooseSchema])
+    ],
     resolvers,
   }),
   context: ()=>Object.assign({}, defaultContext),

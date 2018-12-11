@@ -48,11 +48,10 @@ let baseSchema = makeSchema()
 export default baseSchema
 
 export const makeRemoteSchema = ({ graphqlRoute = '/postgraphile', transforms = [] }:makeSchemaInput) => {
-  console.log(app.get('port'), graphqlRoute)
   const httpLink = new HttpLink({ 
     uri: `http://localhost:${APOLLO_ENGINE_PORT}${graphqlRoute}`, 
     fetch : (url:any,params:any)=>{
-      console.log(url, params)
+      // console.log(url, params)
       return fetch(url,params)
     } 
   });

@@ -1,6 +1,7 @@
 scalar Date
 scalar JSON
 scalar Json
+scalar ID
 scalar MongoID
 
 type Query {

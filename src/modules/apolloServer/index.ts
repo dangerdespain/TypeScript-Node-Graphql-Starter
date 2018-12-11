@@ -7,13 +7,11 @@ import express from 'express';
 import { ApolloEngine } from 'apollo-engine';
 import { APOLLO_ENGINE_KEY, APOLLO_ENGINE_PORT } from "../../util/secrets";
 import bodyParser from 'body-parser'
-import pgSchema, { makeRemoteSchema, makePostgraphileMiddleware } from '../postgraphile' 
+import pgSchema, { makePostgraphileMiddleware } from '../postgraphile' 
 
 
 const app = express();
 let defaultContext = {}
-
-// let remotePgSchema = makeRemoteSchema({})
 
 let pgMiddleware = makePostgraphileMiddleware({})
 app.get('/postgraphile',bodyParser.json(),pgMiddleware)
