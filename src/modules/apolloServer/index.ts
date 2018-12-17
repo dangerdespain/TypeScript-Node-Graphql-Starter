@@ -10,21 +10,23 @@ import bodyParser from 'body-parser'
 import pgSchema, { makePostgraphileMiddleware } from '../postgraphile' 
 
 
-const app = express();
+// const app = express();
 let defaultContext = {}
 
-let pgMiddleware = makePostgraphileMiddleware({})
-app.get('/postgraphile',bodyParser.json(),pgMiddleware)
-app.post('/postgraphile',bodyParser.json(),pgMiddleware)
+// let pgMiddleware = makePostgraphileMiddleware({})
+// app.get('/postgraphile',bodyParser.json(),pgMiddleware)
+// app.post('/postgraphile',bodyParser.json(),pgMiddleware)
 
-export const buildServer = ({ schema, context }:any)=>{
+export const makeApolloServer = ({ app, schema, context }:any)=>{
 
   const server = new ApolloServer({
     schema,
     context: ()=>Object.assign({}, defaultContext, context),
     tracing: true,
     playground: true,
-    cacheControl: true,
+    cacheControl: {
+      defaultMaxAge: 5,
+    },
   });
 
   server.applyMiddleware({ app });
@@ -33,19 +35,22 @@ export const buildServer = ({ schema, context }:any)=>{
     apiKey: APOLLO_ENGINE_KEY,
   });
 
-  engine.listen({
-    port: APOLLO_ENGINE_PORT,
-    graphqlPaths: ['/graphql'],
-    expressApp: app,
-    launcherOptions: {
-      startupTimeout: 3000,
-    },
-  }, () => {
-    /* eslint-disable-next-line */
-    console.log('Listening!');
+  app.listen(3001,()=>{
+
+    engine.listen({
+      port: APOLLO_ENGINE_PORT,
+      graphqlPaths: ['/graphql'],
+      expressApp: app,
+      launcherOptions: {
+        startupTimeout: 5000,
+      },
+    }, () => {
+      /* eslint-disable-next-line */
+      console.log('Listening!');
+    })
   });
 
-  return { server, engine }
+  return server
 }
 
-export default buildServer
+export default makeApolloServer

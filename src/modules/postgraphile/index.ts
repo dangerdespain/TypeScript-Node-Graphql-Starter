@@ -14,8 +14,6 @@ import fetch from 'node-fetch';
 import defaultTransforms from './transforms'
 import { POSTGRES_URI, APOLLO_ENGINE_PORT } from "../../util/secrets";
 
-import app from '../../app'
-
 let pgConfig = POSTGRES_URI
 
 type makeSchemaInput = {
@@ -39,6 +37,8 @@ const makeSchema = ()=>{
   )
   .then((schema:any)=>{
     postGraphileSchema = transformSchema(schema,[]) 
+  }).catch(e=>{
+    console.log(e)
   })
   while(postGraphileSchema==null) require('deasync').sleep(1000)
   return postGraphileSchema
