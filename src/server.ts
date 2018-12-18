@@ -15,12 +15,12 @@ import resolvers from './graphql/resolvers';
 
 let defaultContext = {}
 
-let remotePgSchema = makeRemoteSchema({})
+// let remotePgSchema = makeRemoteSchema({})
 
-let pgMiddleware = makePostgraphileMiddleware({})
-app.get('/postgraphiql',bodyParser.json(),pgMiddleware)
-app.get('/postgraphile',bodyParser.json(),pgMiddleware)
-app.post('/postgraphile',bodyParser.json(),pgMiddleware)
+// let pgMiddleware = makePostgraphileMiddleware({})
+// app.get('/postgraphiql',bodyParser.json(),pgMiddleware)
+// app.get('/postgraphile',bodyParser.json(),pgMiddleware)
+// app.post('/postgraphile',bodyParser.json(),pgMiddleware)
 
 const apolloServer = makeApolloServer({
   app,
@@ -28,8 +28,8 @@ const apolloServer = makeApolloServer({
     schemas : [
       // remotePgSchema,
       // mongooseSchema,
-      // instagramClientSchema,
-      sessionSchema,
+      instagramClientSchema,
+      // sessionSchema,
       typeDefs([]),
     ],
     resolvers,

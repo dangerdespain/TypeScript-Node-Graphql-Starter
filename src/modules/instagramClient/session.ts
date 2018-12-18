@@ -1,13 +1,7 @@
 const Client = require('instagram-private-api/client/v1');
 let CookieStorage = Client.CookieFileStorage
-const storage = new CookieStorage(`${__dirname}/../../../.local/cookies/localuser-1.json`);
 import Bluebird from 'Bluebird'
 import { IG_ADMIN_LOCALFLUENCE_PASSWORD, IG_ADMIN_ABBY_PASSWORD } from '../../util/secrets'
-import { default as InstagramAccount, InstagramAccountModel, InstagramAccountTC } from "../../models/InstagramAccount";
-import { default as InboxThread, InboxThreadModel, InboxThreadTC } from "../../models/InboxThread";
-import { default as InboxThreadItem, InboxThreadItemModel, InboxThreadItemTC } from "../../models/InboxThreadItem";
-import { default as InstagramPost, InstagramPostModel, InstagramPostTC } from "../../models/InstagramPost";
-
 import { get, functions, sortBy, find, defaults, set } from 'lodash'
 
 let sessions = {
@@ -18,6 +12,7 @@ let sessions = {
     storage : new CookieStorage(`${__dirname}/../../../.local/cookies/localuser-1.json`),
     password : IG_ADMIN_ABBY_PASSWORD,
     device : new Client.Device('localfluence.abby'),
+    // proxy : 'http://black-pearl.local:8099'
   }
 }
 export const makeSession = async (existingSessionData:any)=>{
@@ -28,54 +23,19 @@ export const makeSession = async (existingSessionData:any)=>{
     device = new Client.Device(instagramUsername), 
   } = existingSessionData
 
-  let account = await InstagramAccount.findOne({ instagramUsername })
-  if(!account) account = await InstagramAccount.create({ 
-    instagramUsername,
-    isAdminAccount : true,
-    instagram : accountId,
-  })
-
-  await account.update({ adminInstagramAccount : account.get('_id') })
   let predefinedSession = get(sessions,accountId,{})
-  // console.log(existingSessionData)
   await Client.Session.create(device, predefinedSession.storage, instagramUsername, password, predefinedSession.proxy)
   .then(async (session:any) => {
     
     existingSessionData = defaults({
-      _id : account.get('_id'),
       accountId,
       session,
       instagramUsername,
       password,
     },predefinedSession)
-
-    // let session = existingSessionData 
-
   })
   
   set(sessions,accountId,existingSessionData)
-
-  if(!account.get('instagram')){
-    try {
-      let { _params, _id } = await Client.Account.searchForUser(existingSessionData.session, instagramUsername)
-      await account.update({ 
-        profileData : _params, 
-        profileDataLastFetched : new Date(),
-        profileDataFetchError : null,
-        instagram : _params.id, 
-        adminInstagramAccount : account.get('_id') 
-      })
-    }catch(e){
-      await account.update({ profileDataFetchError : e })
-    }
-  }
-
-  let accountData = await Client.Account.showProfile(existingSessionData.session)
-
-  await account.update({
-    accountDataLastFetched : new Date(),
-    accountData
-  })
 
   return existingSessionData
 }
@@ -98,21 +58,4 @@ export const sessionByAccountId = async(accountId:String)=>{
   
   let sessionData = makeSession(existingSessionData)
   return sessionData
-  // if(!existingSessionData) throw new Error('session is not initialized');
-  // return existingSessionData
-  
 }
-
-// export const getAdminForAccountId = async function(accountId:String){
-//   console.log('here')
-//   console.log('here')
-//   let admin = this.adminInstagramId ? (
-//     await InstagramAccount.findById(this.adminInstagramId)
-//     ) : (
-//       await InstagramAccount.findOne({ instagram : asAccountId })
-//       )
-//       console.log('there')
-
-//   if(!admin.get('_id')) throw new Error('admin user not found');
-//   let sessionData = await sessionByAccountId(admin.get('instagram'))
-// }
