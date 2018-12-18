@@ -23,10 +23,10 @@ if (!SESSION_SECRET) {
     process.exit(1);
 }
 
-if (!MONGODB_URI) {
-    logger.error("No mongo connection string. Set MONGODB_URI environment variable.");
-    process.exit(1);
-}
+// if (!MONGODB_URI) {
+//     logger.error("No mongo connection string. Set MONGODB_URI environment variable.");
+//     process.exit(1);
+// }
 
 export const IG_ADMIN_ABBY_PASSWORD = process.env['IG_ADMIN_ABBY_PASSWORD']
 export const IG_ADMIN_LOCALFLUENCE_PASSWORD = process.env['IG_ADMIN_LOCALFLUENCE_PASSWORD']
