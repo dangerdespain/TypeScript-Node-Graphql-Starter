@@ -1,0 +1,14 @@
+type Query {
+  getSession: Session,
+}
+
+type Mutation {
+  authenticateByEmail(email:String!,password:String!):Session
+}
+
+type Session {
+  jwt: String
+  user_id: ID
+  influencer_id: ID
+  is_admin: Boolean
+}

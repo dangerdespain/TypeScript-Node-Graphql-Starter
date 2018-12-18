@@ -8,6 +8,7 @@ import pgSchema, { makeRemoteSchema, makePostgraphileMiddleware } from './module
 import makeApolloServer from './modules/apolloServer'
 import mongooseSchema from './modules/mongoose';
 import instagramClientSchema from './modules/instagramClient';
+import sessionSchema from './modules/session';
 
 import typeDefs from './graphql/typeDefs';
 import resolvers from './graphql/resolvers';
@@ -27,7 +28,8 @@ const apolloServer = makeApolloServer({
     schemas : [
       // remotePgSchema,
       // mongooseSchema,
-      instagramClientSchema,
+      // instagramClientSchema,
+      sessionSchema,
       typeDefs([]),
     ],
     resolvers,
