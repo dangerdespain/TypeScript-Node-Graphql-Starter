@@ -7,13 +7,11 @@ import app from "./app";
 import pgSchema, { makeRemoteSchema, makePostgraphileMiddleware } from './modules/postgraphile' 
 import makeApolloServer from './modules/apolloServer'
 import mongooseSchema from './modules/mongoose';
+import instagramClientSchema from './modules/instagramClient';
 
-import schema from './graphql/schema'
 import typeDefs from './graphql/typeDefs';
 import resolvers from './graphql/resolvers';
 
-
-// const app = express();
 let defaultContext = {}
 
 let remotePgSchema = makeRemoteSchema({})
@@ -27,9 +25,10 @@ const apolloServer = makeApolloServer({
   app,
   schema : mergeSchemas({
     schemas : [
-      remotePgSchema,
+      // remotePgSchema,
+      // mongooseSchema,
+      instagramClientSchema,
       typeDefs([]),
-      mongooseSchema,
     ],
     resolvers,
   }),

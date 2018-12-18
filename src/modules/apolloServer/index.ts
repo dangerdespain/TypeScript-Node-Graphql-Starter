@@ -1,7 +1,7 @@
 import { printSchema } from 'graphql/utilities'
 import { writeFileSync } from 'fs'
 import { mergeSchemas, makeExecutableSchema } from 'graphql-tools';
-import { ApolloServer } from 'apollo-server-express';
+const { ApolloServer } = require('apollo-server-express');
 import CustomScalars, { RegularExpressionFactory } from "@saeris/graphql-scalars";
 import express from 'express';
 import { ApolloEngine } from 'apollo-engine';

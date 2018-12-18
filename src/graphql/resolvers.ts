@@ -5,13 +5,13 @@ import CustomScalars, { RegularExpressionFactory } from "@saeris/graphql-scalars
 
 
 import User from './User'
-import Instagram from './Instagram'
+// import Instagram from './Instagram'
 
 
 const resolvers = {
   Mutation: {
     ...User.Mutation,
-    ...Instagram.Mutation,
+    // ...Instagram.Mutation,
     debug: {
       resolve(root:null,args:any,context:any,info:any){
         return { args, context : keys(context) }
@@ -20,7 +20,7 @@ const resolvers = {
   },
   Query: {
     ...User.Query,     
-    ...Instagram.Query,     
+    // ...Instagram.Query,     
     sayHello : {
       resolve() {
         return { id: '12345', response: `${response} from ${new Date()}` };
@@ -29,7 +29,7 @@ const resolvers = {
   },
   ...CustomScalars.values(),
   ...omit(User,['Mutation','Query']),
-  ...omit(Instagram,['Mutation','Query']),
+  // ...omit(Instagram,['Mutation','Query']),
 };
 
 export default resolvers

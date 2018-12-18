@@ -90,7 +90,8 @@ export default {
 
     initSession : {
       resolve: async (root:any, { instagramUsername }:any, context:any) => {
-        initSessionByUsername(instagramUsername)
+        await sessionByUsername(instagramUsername)
+        return true
       },
     },
 
@@ -98,6 +99,7 @@ export default {
       resolve: async(root:any, { accountId }:any)=>{
         let accountInstance = await InstagramAccount.findOne({ instagram : accountId })
         let sessionData = await sessionByAccountId(accountId)
+        console.log(sessionData)
         await accountInstance.refreshSessionProfile(sessionData)
         return true
       }
@@ -106,8 +108,9 @@ export default {
     refreshFollowingFeed : {
       resolve: async(root:any, { accountId }:any)=>{
         let accountInstance = await InstagramAccount.findOne({ instagram : accountId })
+        console.log(accountInstance)
         let sessionData = await sessionByAccountId(accountId)
-        // console.log(sessionData)
+        console.log(sessionData)
         await accountInstance.refreshFollowingFeed(sessionData)
         return true
       }

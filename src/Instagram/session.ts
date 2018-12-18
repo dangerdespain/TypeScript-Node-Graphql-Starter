@@ -22,7 +22,9 @@ let sessions = {
     session : null,
     storage : new CookieStorage(`${__dirname}/../../../.local/cookies/localuser-1.json`),
     password : IG_ADMIN_ABBY_PASSWORD,
-    device : new Client.Device('localfluence.abby')
+    device : new Client.Device('localfluence.abby'),
+    // proxy : 'http://black-pearl.local:8099'
+    // proxy : 'localfluence:localfluence@136.36.112.192:1194'
   }
 }
 export const makeSession = async (existingSessionData:any)=>{
@@ -41,17 +43,18 @@ export const makeSession = async (existingSessionData:any)=>{
   })
 
   await account.update({ adminInstagramAccount : account.get('_id') })
-
-  await Client.Session.create(device, existingSessionData.storage, instagramUsername, password)
+  let predefinedSession = get(sessions,accountId,{})
+  // console.log(existingSessionData)
+  await Client.Session.create(device, predefinedSession.storage, instagramUsername, password, predefinedSession.proxy)
   .then(async (session:any) => {
-
+    
     existingSessionData = defaults({
       _id : account.get('_id'),
       accountId,
       session,
       instagramUsername,
       password,
-    },get(sessions,accountId,{}))
+    },predefinedSession)
 
     // let session = existingSessionData 
 
@@ -89,7 +92,8 @@ export const sessionByUsername = async(instagramUsername:String)=>{
   let existingSessionData = find(sessions,{ instagramUsername })
   if(!existingSessionData) throw new Error('user is not configured');
   if(existingSessionData && existingSessionData.session !== null) return existingSessionData;
-  return await makeSession(existingSessionData)
+  let sessionData = makeSession(existingSessionData)
+  return sessionData
   
 }
 
@@ -99,7 +103,8 @@ export const sessionByAccountId = async(accountId:String)=>{
   if(!existingSessionData) throw new Error('user is not configured');
   if(existingSessionData && existingSessionData.session !== null) return existingSessionData;
   
-  return await makeSession(existingSessionData)
+  let sessionData = makeSession(existingSessionData)
+  return sessionData
   // if(!existingSessionData) throw new Error('session is not initialized');
   // return existingSessionData
   

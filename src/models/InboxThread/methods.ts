@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import Bluebird from 'Bluebird'
 import { get, functions, sortBy } from 'lodash'
-const Client = require('instagram-private-api').V1;
+const Client = require('instagram-private-api/client/v1');
 
 import InboxThreadItem from '../InboxThreadItem'
 type comparePasswordFunction = (candidatePassword: string, cb: (err: any, isMatch: any) => {}) => void;

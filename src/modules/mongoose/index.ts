@@ -34,43 +34,43 @@ import {
 
 schemaComposer.Query.addFields({
 
-  userMany: UserTC.getResolver('findMany'),
+  // userMany: UserTC.getResolver('findMany'),
 
-  instagramAccountById : InstagramAccountTC.getResolver('findById'),
-  instagramAccountByIds: InstagramAccountTC.getResolver('findByIds'),
-  instagramAccountOne  : InstagramAccountTC.getResolver('findOne'),
-  instagramAccountMany : InstagramAccountTC.getResolver('findMany'),
-  instagramAccountCount: InstagramAccountTC.getResolver('count'),
-  instagramAccountConnection: InstagramAccountTC.getResolver('connection'),
-  instagramAccountPagination: InstagramAccountTC.getResolver('pagination'),
+  // instagramAccountById : InstagramAccountTC.getResolver('findById'),
+  // instagramAccountByIds: InstagramAccountTC.getResolver('findByIds'),
+  // instagramAccountOne  : InstagramAccountTC.getResolver('findOne'),
+  // instagramAccountMany : InstagramAccountTC.getResolver('findMany'),
+  // instagramAccountCount: InstagramAccountTC.getResolver('count'),
+  // instagramAccountConnection: InstagramAccountTC.getResolver('connection'),
+  // instagramAccountPagination: InstagramAccountTC.getResolver('pagination'),
 
-  instagramPostById : InstagramPostTC.getResolver('findById'),
-  instagramPostByIds: InstagramPostTC.getResolver('findByIds'),
-  instagramPostOne  : InstagramPostTC.getResolver('findOne'),
-  instagramPostMany : InstagramPostTC.getResolver('findMany'),
-  instagramPostCount: InstagramPostTC.getResolver('count'),
-  instagramPostConnection: InstagramPostTC.getResolver('connection'),
-  instagramPostPagination: InstagramPostTC.getResolver('pagination'),
+  // instagramPostById : InstagramPostTC.getResolver('findById'),
+  // instagramPostByIds: InstagramPostTC.getResolver('findByIds'),
+  // instagramPostOne  : InstagramPostTC.getResolver('findOne'),
+  // instagramPostMany : InstagramPostTC.getResolver('findMany'),
+  // instagramPostCount: InstagramPostTC.getResolver('count'),
+  // instagramPostConnection: InstagramPostTC.getResolver('connection'),
+  // instagramPostPagination: InstagramPostTC.getResolver('pagination'),
 
-  inboxThreadById : InboxThreadTC.getResolver('findById'),
-  inboxThreadMany : InboxThreadTC.getResolver('findMany'),
-  inboxThreadOne: InboxThreadTC.getResolver('findOne'),
+  // inboxThreadById : InboxThreadTC.getResolver('findById'),
+  // inboxThreadMany : InboxThreadTC.getResolver('findMany'),
+  // inboxThreadOne: InboxThreadTC.getResolver('findOne'),
 
-  inboxThreadItemMany : InboxThreadItemTC.getResolver('findMany'),
-  inboxThreadItemOne : InboxThreadItemTC.getResolver('findOne'),
+  // inboxThreadItemMany : InboxThreadItemTC.getResolver('findMany'),
+  // inboxThreadItemOne : InboxThreadItemTC.getResolver('findOne'),
   
 });
 
 schemaComposer.Mutation.addFields({
 
   instagramAccountCreateOne : InstagramAccountTC.getResolver('createOne'),
-  instagramAccountCreateMany: InstagramAccountTC.getResolver('createMany'),
-  instagramAccountUpdateById: InstagramAccountTC.getResolver('updateById'),
-  instagramAccountUpdateOne : InstagramAccountTC.getResolver('updateOne'),
-  instagramAccountUpdateMany: InstagramAccountTC.getResolver('updateMany'),
-  instagramAccountRemoveById: InstagramAccountTC.getResolver('removeById'),
-  instagramAccountRemoveOne : InstagramAccountTC.getResolver('removeOne'),
-  instagramAccountRemoveMany: InstagramAccountTC.getResolver('removeMany'),
+  // instagramAccountCreateMany: InstagramAccountTC.getResolver('createMany'),
+  // instagramAccountUpdateById: InstagramAccountTC.getResolver('updateById'),
+  // instagramAccountUpdateOne : InstagramAccountTC.getResolver('updateOne'),
+  // instagramAccountUpdateMany: InstagramAccountTC.getResolver('updateMany'),
+  // instagramAccountRemoveById: InstagramAccountTC.getResolver('removeById'),
+  // instagramAccountRemoveOne : InstagramAccountTC.getResolver('removeOne'),
+  // instagramAccountRemoveMany: InstagramAccountTC.getResolver('removeMany'),
 
 });
 

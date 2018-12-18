@@ -3,7 +3,7 @@ import InstagramAccount from '../InstagramAccount'
 import InstagramPost from '../InstagramPost'
 import Bluebird from 'Bluebird'
 import { get, functions, sortBy, map, uniq } from 'lodash'
-const Client = require('instagram-private-api').V1;
+const Client = require('instagram-private-api/client/v1');
 type comparePasswordFunction = (candidatePassword: string, cb: (err: any, isMatch: any) => {}) => void;
 
 export default (schema:any)=>{
@@ -20,6 +20,8 @@ export default (schema:any)=>{
     }, { 
       upsert : true 
     })
+
+    console.log(accountData)
     return account
     
   }
@@ -28,8 +30,6 @@ export default (schema:any)=>{
     if(!this.isAdminAccount) throw new Error('this method can only be used by admin users')
     return Client.Relationship.create(sessionData.session,accountId)
   }
-
-
 
   schema.methods.refreshProfileByUsername = async function(sessionData:any, instagramUsername:String){
     if(!this.isAdminAccount) throw new Error('this method can only be used by admin users')

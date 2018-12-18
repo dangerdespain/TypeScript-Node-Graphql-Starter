@@ -1,8 +1,11 @@
 scalar Date
 scalar JSON
 scalar Json
-scalar ID
-scalar MongoID
+# scalar ID
+# scalar MongoID
+# scalar UUID
+# scalar Int
+# scalar String
 
 type Query {
   sayHello: Response
