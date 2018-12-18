@@ -28,8 +28,8 @@ const apolloServer = makeApolloServer({
     schemas : [
       // remotePgSchema,
       // mongooseSchema,
-      instagramClientSchema,
-      // sessionSchema,
+      // instagramClientSchema,
+      sessionSchema,
       typeDefs([]),
     ],
     resolvers,

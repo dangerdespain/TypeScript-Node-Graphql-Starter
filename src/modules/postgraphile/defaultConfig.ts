@@ -13,6 +13,7 @@ export default {
   queryCacheMaxSize : 50,
   // jwtSecret : config.jwtauth.secret,
   // jwtVerifyOptions : {
+    // public.jwt_token
   //   algorithm: config.jwtauth.algorithm 
   // },
   appendPlugins : [
