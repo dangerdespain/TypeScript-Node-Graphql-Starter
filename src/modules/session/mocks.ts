@@ -1,4 +1,4 @@
-export const w = {
+export const mockSession = {
   jwt : ``,
   user_id : null,
   influencer_id : null,

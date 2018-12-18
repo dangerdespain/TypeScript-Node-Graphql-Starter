@@ -6,7 +6,7 @@ import app from "./app";
 
 import pgSchema, { makeRemoteSchema, makePostgraphileMiddleware } from './modules/postgraphile' 
 import makeApolloServer from './modules/apolloServer'
-import mongooseSchema from './modules/mongoose';
+// import mongooseSchema from './modules/mongoose';
 import instagramClientSchema from './modules/instagramClient';
 import sessionSchema from './modules/session';
 
